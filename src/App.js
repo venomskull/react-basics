@@ -9,8 +9,16 @@ import ImperativeHandleUse from './components/Hooks/imperativeHandleUse';
 import ContextUse from './components/Hooks/contextUse';
 import MemoUse from './components/Hooks/memoUse';
 import CallBackUse from './components/Hooks/callbackUse';
+import TestJs from './components/JS/TestJs';
+import useFetch from './components/CustomHooks/useFetch';
 
 function App() {
+  const { data, loading, error, refetch } = useFetch('https://v2.jokeapi.dev/joke/Any');
+
+  if(loading) return <h1>loading..</h1>
+
+  if(error) console.log(error);
+
   return (
     <div className="App">
       {/* <StateUse /> */}
@@ -21,7 +29,11 @@ function App() {
       {/* <ImperativeHandleUse /> */}
       {/* <ContextUse /> */}
       {/* <MemoUse /> */}
-      <CallBackUse />
+      {/* <CallBackUse /> */}
+      {/* <TestJs /> */}
+
+      <h1>{data?.setup}:{data?.delivery}</h1>
+      <button onClick={refetch}>Refetch</button>
     </div>
   );
 }
